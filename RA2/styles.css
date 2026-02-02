@@ -1,0 +1,140 @@
+html, body { 
+    height: 100%; 
+} 
+
+body { 
+    display: flex; 
+    flex-direction: column; }
+
+main {
+  flex: 1;
+}
+
+/*PAGINA 1*/
+.Posicionament {
+  background-color: rgb(161, 220, 238);
+  position:sticky;
+  top: 0;
+
+}
+.nav-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 160px;
+    padding: 20px 0;
+    width: calc(100% - 40px);
+    margin: 0 auto;
+    border-bottom: 1px solid #ddd;
+}
+.nav-top a {
+  text-decoration: none;
+  color: rgb(10, 10, 10);
+  font-size: 14px;
+}
+/**************************************************************************************/
+.caja-ins{
+  margin-top: 10rem;
+  margin-bottom: 10rem;
+  margin-right: 10rem;
+  margin-left: 10rem;
+  padding: 3rem;
+  display: flex;
+  background-color: gray;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 3rem;
+
+}
+.tarjeta{
+  background-color: rgb(243, 238, 238);
+  display: flex;
+  flex-direction: column;
+  width: 15rem;
+  padding: 4rem;
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.tarjeta:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+}
+.tarjeta img{
+  border: 2px solid;
+  width: 15rem;
+  height: 10rem;
+}
+
+.instrucciones{
+  text-align: center;
+}
+.instrucciones h1{
+  text-decoration:underline;
+}
+
+.contenedor-mecanica{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3rem;
+}
+.tarjeta1{
+  background-color: rgb(184, 176, 176);
+  display: flex;
+  flex-direction: column;
+  width: 15rem;
+  padding: 4rem;
+  border-radius: 8px;
+  text-align: center;
+  margin-left: 3rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+ 
+}
+.tarjeta1:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+}
+.tarjeta1 img{
+  border: 2px solid;
+  width: 15rem;
+  height: 10rem;
+}
+
+
+
+
+
+
+
+/*************************************************************************************/
+.footer {
+  background-color: #535151;
+  padding: 20px;
+}
+
+.footer-right {
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.social-icons a {
+  color: white;
+  font-size: 28px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #00ff88;
+  transform: scale(1.2);
+}
+
+.copyright {
+  color: #aaa;
+  font-size: 14px;
+}
+/*PAGINA 1*/
