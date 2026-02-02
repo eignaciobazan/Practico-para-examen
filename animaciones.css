@@ -1,0 +1,50 @@
+.card{
+    display: block;
+    width: 100px;
+    height: 150px;
+    cursor: pointer;
+    perspective: 1000px;
+      
+}
+
+.card-checkbox{
+    display: none; 
+}
+
+.voltea{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s ease;
+}
+
+.card-front,
+.card-back{
+    inset: 0;
+    position: absolute;
+    /*cara encima de la otra*/
+    backface-visibility: hidden; 
+    /*evita ver al revez la cara*/
+    
+}
+
+.card-back{
+    transform: rotateY(-180deg);
+}
+
+.card-checkbox:checked+ .card .voltea{
+    transform: rotateY(-180deg);
+}
+
+.card-front img{
+    width: 60%;
+    height: 80%;
+}
+
+
+.card-back img{
+    width: 60%;
+    height: 80%;
+}
+
