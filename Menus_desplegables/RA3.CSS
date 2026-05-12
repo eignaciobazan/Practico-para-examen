@@ -1,0 +1,39 @@
+.acordeon input {
+  display: none;
+}
+
+.acordeon-titulo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #eee;
+  padding: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  border: 1px solid #ccc;
+}
+
+.acordeon-titulo::after {
+  content: "+";
+  font-size: 20px;
+  transition: 0.3s;
+}
+
+.acordeon input:checked + .acordeon-titulo::after {
+  content: "-";
+}
+
+.acordeon-contenido {
+  max-height: 0;
+  overflow: hidden;
+  background: #fafafa;
+  border: 1px solid #ccc;
+  border-top: none;
+  transition: max-height 0.3s ease;
+  padding: 0 12px;
+}
+
+.acordeon input:checked ~ .acordeon-contenido {
+  max-height: 200px; /* Ajusta según contenido */
+  padding: 12px;
+}
