@@ -1,27 +1,40 @@
-
-.Boton{
+.Boton {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column; /* Cambiado a column para que el cuadro salga abajo */
+    align-items: flex-start;
     padding: 12px;
-    background-color: aqua;
+    background-color: #f0f0f0;
 }
-.Boton input{
+
+.Boton input {
     display: none;
 }
-.mensaje{
+
+.mensaje {
     cursor: pointer;
+    background-color: aqua;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
 }
 
-.Cuadro{
+/* ESTADO INICIAL DEL CUADRO (OCULTO) */
+.Cuadro {
     max-height: 0;
-    display: flex;
-    text-align: center;
-    gap: 2rem;
-    padding: 0px;
     overflow: hidden;
+    background-color: #ffcccc;
+    color: #cc0000;
+    border-left: 5px solid #cc0000;
+    
+    /* El truco del padding: 0 arriba/abajo, 20px a los lados */
+    padding: 0 20px; 
+    
+    /* ¡LA CLAVE! Esto creará la animación suave */
+    transition: max-height 0.4s ease, padding 0.4s ease; 
 }
 
-.Boton input:checked ~.Cuadro{
-    max-height: 10rem;
-    padding: 20px;
+/* ESTADO ACTIVO (MOSTRAR) */
+.Boton input:checked ~ .Cuadro {
+    max-height: 100px; /* Un valor estimado superior al contenido */
+    padding: 15px 20px; /* Aquí ya le damos espacio arriba y abajo */
 }

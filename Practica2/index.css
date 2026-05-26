@@ -1,0 +1,171 @@
+/* ==========================================================================
+   1. CONFIGURACIÓN GENERAL Y RESET
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #1a1a1a;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Ocultamos los inputs reales del formulario */
+#carrera-on, #carrera-reset, #play-pausa {
+  display: none;
+}
+
+/* ==========================================================================
+   2. DISEÑO DE LA INTERFAZ (BOTONES Y PISTA)
+   ========================================================================== */
+.contenedor-principal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.panel-control {
+  display: flex;
+  gap: 15px;
+}
+
+.btn {
+  padding: 12px 24px;
+  background-color: #333;
+  color: #fff;
+  border: 2px solid #555;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  user-select: none;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.btn:hover {
+  background-color: #444;
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+/* Colores dinámicos para identificar los botones */
+.btn-play { border-color: #00ff88; }
+.btn-reset { border-color: #ff3333; }
+.btn-on { border-color: #00a2ff; display: none; } /* Oculto por defecto */
+
+
+/* CONTENEDOR DE LA PISTA */
+.circuito {
+  position: relative;
+  width: 1220px;   
+  height: 647px;
+  /* CAMBIA ESTA LÍNEA: */
+  background-image: url('imagenes/pista.jpeg'); 
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  overflow: hidden;
+}
+
+/* EL AUTO PNG */
+.auto {
+  position: absolute;
+  bottom: 125px; 
+  left: 50%;
+  width: 60px;
+  height: 30px;
+  /* CAMBIA ESTA LÍNEA: */
+  background-image: url('imagenes/auto1.png'); 
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  
+  transform-origin: center;
+  transform: translate(-30px, 0) rotate(180deg);
+  animation: carrera-triangulo 8s linear infinite;
+  animation-play-state: paused;
+}
+
+
+/* ==========================================================================
+   3. LÓGICA DE INTERACTIVIDAD (EL TRUCO DEL EXAMEN)
+   ========================================================================== */
+
+/* A. CONTROL PLAY / PAUSA: Si el checkbox está marcado, el auto corre */
+#play-pausa:checked ~ .contenedor-principal .circuito .auto {
+  animation-play-state: running;
+}
+
+/* Cambiar el aspecto visual del botón para simular que está en "Pausa" */
+#play-pausa:checked ~ .contenedor-principal .btn-play {
+  background-color: #004d26;
+  content: "⏸️ Pausar Carrera";
+}
+
+/* B. CONTROL RESETEAR: Si se marca el radio de Reset, quitamos la animación 
+      provocando que el coche vuelva instantáneamente al punto 0% (Meta) */
+#carrera-reset:checked ~ .contenedor-principal .circuito .auto {
+  animation: none !important;
+  transform: translate(-30px, 0) rotate(180deg);
+}
+
+/* Cuando le damos a Resetear, mostramos el botón "Reactivar" y ocultamos los otros 
+   para forzar al estudiante a limpiar el estado antes de volver a correr */
+#carrera-reset:checked ~ .contenedor-principal .btn-play { display: none; }
+#carrera-reset:checked ~ .contenedor-principal .btn-reset { display: none; }
+#carrera-reset:checked ~ .contenedor-principal .btn-on { display: block; background-color: #00a2ff; }
+
+
+/* ==========================================================================
+   4. COORDENADAS DE LA ANIMACIÓN (@KEYFRAMES)
+   ========================================================================== */
+@keyframes carrera-triangulo {
+  /* 0% - SALIDA: En la Meta mirando a la izquierda */
+  0% {
+    transform: translate(-30px, 0px) rotate(180deg);
+  }
+
+  /* 22% - Curva 1 (Inferior Izquierda): Recorre la recta horizontal */
+  22% {
+    transform: translate(-420px, 0px) rotate(180deg);
+  }
+  /* 27% - Derrape/Giro: Rota hacia la diagonal de subida (300deg) */
+  27% {
+    transform: translate(-420px, 0px) rotate(300deg);
+  }
+
+  /* 50% - Curva 2 (Vértice Superior): Sube toda la montaña del triángulo */
+  50% {
+    transform: translate(-30px, -395px) rotate(300deg);
+  }
+  /* 55% - Derrape/Giro: Rota arriba para enfilar la bajada derecha (60deg) */
+  55% {
+    transform: translate(-30px, -395px) rotate(60deg);
+  }
+
+  /* 77% - Curva 3 (Inferior Derecha): Baja la pendiente */
+  77% {
+    transform: translate(360px, 0px) rotate(60deg);
+  }
+  /* 82% - Derrape/Giro: Se endereza para mirar a la izquierda de nuevo (180deg) */
+  82% {
+    transform: translate(360px, 0px) rotate(180deg);
+  }
+
+  /* 100% - META: Regresa al inicio. 
+     Sumamos 360° completos a los 180° iniciales (= 540deg) para que el coche 
+     gire de continuo y nunca haga un giro inverso brusco al reiniciarse el bucle */
+  100% {
+    transform: translate(-30px, 0px) rotate(540deg);
+  }
+}
