@@ -1,0 +1,27 @@
+
+.Boton{
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+    background-color: aqua;
+}
+.Boton input{
+    display: none;
+}
+.mensaje{
+    cursor: pointer;
+}
+
+.Cuadro{
+    max-height: 0;
+    display: flex;
+    text-align: center;
+    gap: 2rem;
+    padding: 0px;
+    overflow: hidden;
+}
+
+.Boton input:checked ~.Cuadro{
+    max-height: 10rem;
+    padding: 20px;
+}
